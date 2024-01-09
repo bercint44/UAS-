@@ -22,11 +22,18 @@ public class Server {
 
             // Buat input dan output stream untuk berkomunikasi dengan client
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+           
+            //Membuat objek PrintWriter untuk menulis data ke soket klien 
+            //(clientSocket.getOutputStream()) dengan opsi autoflush diaktifkan.
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 
+            //Deklarasi variabel command sebagai string
             String command;
+            // selama perintah tidak null (kosong) maka 
+            //cetak perintah yang dikirimkan dari client
             while ((command = in.readLine()) != null) {
                 System.out.println("Perintah : " + command);
+            
                 // Eksekusi perintah CMD dan kirim output ke client
                 executeCommand(command, out);
             }
