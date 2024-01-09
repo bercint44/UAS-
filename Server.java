@@ -27,6 +27,19 @@ public class Server {
             String command;
             while ((command = in.readLine()) != null) {
                 System.out.println("Perintah : " + command);
+                // Eksekusi perintah CMD dan kirim output ke client
+                executeCommand(command, out);
+            }
+
+            // Tutup koneksi dan resources
+            in.close();
+            out.close();
+            clientSocket.close();
+            serverSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
                 // Eksekusi perintah CMD dan kirim output ke client
                 executeCommand(command, out);
