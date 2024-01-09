@@ -15,3 +15,16 @@ public class Client {
 
             // Buat socket untuk terhubung ke server dengan alamat IP dan port yang ditentukan pengguna
             Socket socket = new Socket(serverIP, serverPort);
+            // Buat input dan output stream untuk berkomunikasi dengan server
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+
+            String command;
+            do {
+                // Baca input dari pengguna dan kirim ke server
+                System.out.print("Masukkan perintah untuk dijalankan di server (exit untuk keluar): ");
+                command = userInput.readLine();
+
+                // Kirim perintah ke server
+                out.println(command);
+
