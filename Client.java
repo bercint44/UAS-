@@ -27,4 +27,10 @@ public class Client {
 
                 // Kirim perintah ke server
                 out.println(command);
+                // Baca dan tampilkan output dari server
+                String serverResponse;
+                while (!(serverResponse = in.readLine()).equals("Server: Eksekusi perintah selesai.")) {
+                    System.out.println(serverResponse);
+                }
+            } while (!command.equalsIgnoreCase("exit"));
 
