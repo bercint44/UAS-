@@ -40,7 +40,24 @@ public class Server {
             e.printStackTrace();
         }
     }
+    private static void executeCommand(String command, PrintWriter out) {
+        try {
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", command);
+            processBuilder.redirectErrorStream(true);
 
-                // Eksekusi perintah CMD dan kirim output ke client
-                executeCommand(command, out);
+            Process process = processBuilder.start();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                out.println(line);
             }
+
+            process.waitFor();
+            out.println("Server: Eksekusi perintah selesai.");
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+            out.println("Server: Gagal mengeksekusi perintah.");
+        }
+    }
+}
