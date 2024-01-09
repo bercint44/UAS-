@@ -9,6 +9,8 @@ public class Server {
 
             // Meminta pengguna untuk memasukkan port
             System.out.print("Masukkan port untuk server: ");
+
+            //baca input dari user dan masukkan dalam variabel port
             int port = Integer.parseInt(userInput.readLine());
 
             // Buat server socket dengan port yang ditentukan pengguna
@@ -29,6 +31,7 @@ public class Server {
 
             //Deklarasi variabel command sebagai string
             String command;
+            
             // selama perintah tidak null (kosong) maka 
             //cetak perintah yang dikirimkan dari client
             while ((command = in.readLine()) != null) {
@@ -72,6 +75,7 @@ private static void executeCommand(String command, PrintWriter out) {
         // Mencetak pesan bahwa eksekusi perintah telah selesai
         out.println("Server: Eksekusi perintah selesai.");
     } catch (IOException | InterruptedException e) {
+        
         // Menangani pengecualian dengan mencetak jejak tumpukan dan pesan kesalahan
         e.printStackTrace();
         out.println("Server: Gagal mengeksekusi perintah.");
