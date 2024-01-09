@@ -33,4 +33,13 @@ public class Client {
                     System.out.println(serverResponse);
                 }
             } while (!command.equalsIgnoreCase("exit"));
+            // Tutup koneksi dan resources
+            in.close();
+            out.close();
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
 
