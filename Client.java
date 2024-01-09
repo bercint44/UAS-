@@ -49,7 +49,9 @@ public class Client {
             } 
                 //Lakukan selama perintah bukan exit
                 while (!command.equalsIgnoreCase("exit"));
+            
             // Tutup koneksi dan resources
+            
            //tutup aliran masukan (input stream)
             in.close();
 
