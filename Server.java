@@ -47,24 +47,34 @@ public class Server {
             e.printStackTrace();
         }
     }
-    private static void executeCommand(String command, PrintWriter out) {
-        try {
-            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", command);
-            processBuilder.redirectErrorStream(true);
+     // Deklarasi fungsi untuk mengeksekusi perintah
+private static void executeCommand(String command, PrintWriter out) {
+    try {
+        // Membuat objek ProcessBuilder untuk eksekusi perintah
+        ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", command);
+        processBuilder.redirectErrorStream(true);
 
-            Process process = processBuilder.start();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        // Memulai proses eksekusi perintah
+        Process process = processBuilder.start();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
-            String line;
-            while ((line = reader.readLine()) != null) {
-                out.println(line);
-            }
+        // Membaca dan mencetak keluaran perintah
+        String line;
 
-            process.waitFor();
-            out.println("Server: Eksekusi perintah selesai.");
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-            out.println("Server: Gagal mengeksekusi perintah.");
+        //selama perintah terbaca tidak kosong maka tetap jalankan
+        while ((line = reader.readLine()) != null) {
+            out.println(line);
         }
+
+        // Menunggu proses eksekusi perintah selesai
+        process.waitFor();
+        
+        // Mencetak pesan bahwa eksekusi perintah telah selesai
+        out.println("Server: Eksekusi perintah selesai.");
+    } catch (IOException | InterruptedException e) {
+        // Menangani pengecualian dengan mencetak jejak tumpukan dan pesan kesalahan
+        e.printStackTrace();
+        out.println("Server: Gagal mengeksekusi perintah.");
     }
+}
 }
